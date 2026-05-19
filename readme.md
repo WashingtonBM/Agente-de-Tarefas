@@ -1,60 +1,233 @@
+# 🤖 AGENTE DE TAREFAS TRELLO COM PYTHON
 
-    <h1>Título do Curso ou Projeto</h1>
-  </p>
-</div>
-<!--END_SECTION:header-->
+Sistema automatizado de gerenciamento de tarefas utilizando Python e API do Trello.
+O agente monitora cards continuamente, classifica prioridades automaticamente e move tarefas entre listas do board em tempo real.
 
-<p align="center">
-  <img src="https://img.shields.io/static/v1?label=DIO&message=Education&color=E94D5F&labelColor=202024" alt="DIO Project" />
-  <a href="NIVEL"><img  src="https://img.shields.io/static/v1?label=Nivel&message=Basico&color=E94D5F&labelColor=202024" alt="Nivel"></a>
+---
+## 💻 Sobre o Projeto:
 
-</p>
+# 🚀 Funcionalidades
 
-<!--  -->
-<table align="center">
-<thead>
-  <tr>
-    <td>
-        <p align="center">Expert</p>
-        <a href="https://github.com/felipeAguiarCode">
-        <img src="https://avatars0.githubusercontent.com/u/37452836?v=3&s=115" alt="@felipeAguiarCode"><br>
-      </a>
-    </td>
-    <td colspan="3">
-    <p>🎉 10y+ em sistemas comerciais com .NET C# e NODE.JS.
-      <br/>
-     🌟 Desenvolvedor fullstack - Coordenador de educação na DIO
-      <br/>
-    👨‍💻 Foco em front-ends SPA com React, Angular e Vue.js
-    </p>
-      <a 
-      href="https://www.linkedin.com/in/felipe-me/" 
-      align="center">
-           <img 
-            align="center" 
-            alt="Material de Apoio" 
-            src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
-            >
-        </a>
-        <a href="https://www.instagram.com/felipeaguiar.exe/" target="_blank">
-            <img 
-              align="center" 
-              alt="Instagram" 
-              src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"
-            >
-        </a>
-    </td>
-  </tr>
-</thead>
-</table>
-<!--  -->
+✅ Monitoramento contínuo do Trello
+✅ Integração com API REST do Trello
+✅ Classificação automática de tarefas
+✅ Movimentação automática de cards
+✅ Execução em loop contínuo
+✅ Tratamento de erros
+✅ IA local sem custo
+✅ Sem dependência de APIs pagas
+✅ Estrutura pronta para produção
 
-<br/>
-<br/>
+---
 
-## 💻 Sobre o Projeto
+# 🧠 Como o Agente Funciona
 
-Vamos construir uma página spa, responsiva, para usar em diversos tipos de micro, pequena e média empresas. Contém as seguintes seções: Header, Navigation, Home, Sobre, Serviços, Depoimentos, Contato e Footer que faz xxx e yyy
+O agente:
+
+1. Consulta os cards do board
+2. Analisa nome e descrição da tarefa
+3. Classifica a prioridade automaticamente
+4. Move o card para a lista correspondente
+5. Aguarda alguns segundos
+6. Reinicia o ciclo automaticamente
+
+---
+
+# 📌 Estrutura de Prioridades
+
+| Palavra-chave                 | Prioridade |
+| ----------------------------- | ---------- |
+| urgente, erro, falha, crítico | Alta       |
+| teste, revisar, ajustar       | Média      |
+| demais tarefas                | Baixa      |
+
+---
+
+# 📂 Estrutura do Projeto
+
+```bash
+AGENTE_DE_TAREFAS/
+│
+├── app.py
+├── README.md
+├── venv/
+```
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+* Python 3
+* Requests
+* API REST Trello
+
+---
+
+# 🔐 Configuração do Trello
+
+## 1. Gerar API KEY
+
+Acesse:
+
+```bash
+https://trello.com/app-key
+```
+
+Copie sua:
+
+* API KEY
+
+---
+
+## 2. Gerar TOKEN
+
+Abra no navegador:
+
+```bash
+https://trello.com/1/authorize?expiration=never&name=AgentePython&scope=read,write&response_type=token&key=SUA_KEY
+```
+
+Copie o token gerado.
+
+---
+
+# ⚙️ Configuração do Projeto
+
+No arquivo `app.py`:
+
+```python
+TRELLO_KEY = "SUA_KEY"
+TRELLO_TOKEN = "SEU_TOKEN"
+BOARD_ID = "SEU_BOARD_ID"
+```
+
+---
+
+# ▶️ Como Executar
+
+## 1. Criar ambiente virtual
+
+```bash
+python -m venv venv
+```
+
+---
+
+## 2. Ativar ambiente virtual
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## 3. Instalar dependências
+
+```bash
+pip install requests
+```
+
+---
+
+## 4. Executar o agente
+
+```bash
+python app.py
+```
+
+---
+
+# 📋 Exemplo de Execução
+
+```bash
+🤖 AGENTE INICIADO...
+
+STATUS LISTS: 200
+STATUS CARDS: 200
+
+📌 Card: Corrigir erro no sistema
+🧠 Categoria: alta_prioridade
+🎉 Card movido com sucesso!
+
+⏳ Aguardando 15 segundos...
+```
+
+---
+
+# 🧠 Lógica de Classificação
+
+```python
+def classificar_com_ia(nome, descricao=""):
+    texto = (nome + " " + descricao).lower()
+
+    if any(x in texto for x in ["urgente", "erro", "falha", "crítico"]):
+        return "alta_prioridade"
+
+    if any(x in texto for x in ["teste", "revisar", "ajustar"]):
+        return "media_prioridade"
+
+    return "baixa_prioridade"
+```
+
+---
+
+# 🔄 Fluxo do Sistema
+
+```text
+Trello → Leitura de Cards
+        ↓
+Classificação Inteligente
+        ↓
+Movimentação Automática
+        ↓
+Loop Contínuo
+```
+
+---
+
+# 🛡 Tratamento de Erros
+
+O sistema possui:
+
+* validação de resposta da API
+* logs automáticos
+* retry automático
+* proteção contra falhas do Trello
+
+---
+
+# 📈 Melhorias Futuras
+
+* Dashboard web
+* Integração com WhatsApp
+* Notificações Telegram
+* Banco de dados
+* Deploy em nuvem
+* Multiagentes
+* IA avançada
+
+---
+
+# 👨‍💻 Autor
+
+Projeto desenvolvido por Washington Brito.
+
+---
+
+# 📄 Licença
+
+Este projeto é livre para estudos, melhorias e adaptações.
+
+----------------------------------------------------------
+---------
 
 ## 📚 Pré-requisitos de Habilidades e Níveis de Conhecimento
 
